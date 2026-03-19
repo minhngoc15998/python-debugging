@@ -5,51 +5,30 @@
 import sys
 
 
-def area_of_rectangle(height, width = None):
+def area_of_rectangle(height, width=None):
     """
     Returns the area of a rectangle.
-
-    Parameters
-    ----------
-    height : int or float 
-        The height of the rectangle.
-    width : int or float
-        The width of the rectangle. If `None` width is assumed to be equal to 
-        the height.
-
-    Returns
-    -------
-    int or float
-        The area of the rectangle
-
-    Examples
-    --------
-    >>> area_of_rectangle(7)
-    49
-    >>> area_of_rectangle (7, 2)
-    14
     """
-    if width:
+    if width is None:
         width = height
-    area = height * width
-    return area
+    return height * width
+
 
 if __name__ == '__main__':
     if (len(sys.argv) < 2) or (len(sys.argv) > 3):
         message = (
-                "{script_name}: Expecting one or two command-line arguments:\n"
-                "\tthe height of a square or the height and width of a "
-                "rectangle".format(script_name = sys.argv[0]))
+            f"{sys.argv[0]}: Expecting one or two command-line arguments:\n"
+            "\tthe height of a square or the height and width of a rectangle"
+        )
         sys.exit(message)
-    height = sys.argv[1]
-    width = height
-    if len(sys.argv) > 3:
-        width = sys.argv[1]
+
+    height = float(sys.argv[1])
+
+    if len(sys.argv) == 3:
+        width = float(sys.argv[2])
+    else:
+        width = height
 
     area = area_of_rectangle(height, width)
 
-    message = "The area of a {h} X {w} rectangle is {a}".format(
-            h = height,
-            w = width,
-            a = area)
-    print(message)
+    print(f"The area of a {height} X {width} rectangle is {area}")
